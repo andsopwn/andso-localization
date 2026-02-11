@@ -1,0 +1,35 @@
+name: PTimer
+
+options:
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: 6.0
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    GENERATE_INFOPLIST_FILE: NO
+    # Sign the *bundle* (not only the Mach-O) so macOS can properly identify the app
+    # for things like Notifications settings.
+    CODE_SIGNING_ALLOWED: YES
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "andso"
+
+targets:
+  PTimer:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources
+      - path: Resources
+    settings:
+      base:
+        # Keep this distinct from the legacy PTimer bundle id, otherwise macOS will
+        # treat both as the "same" app (LaunchServices/Notifications).
+        PRODUCT_BUNDLE_IDENTIFIER: com.andso.localization
+        PRODUCT_NAME: "andso localization"
+        EXECUTABLE_NAME: andso
+        PRODUCT_MODULE_NAME: andso
+        INFOPLIST_FILE: Supporting/Info.plist
+        MARKETING_VERSION: 26.02.11
+        CURRENT_PROJECT_VERSION: 2
+        INFOPLIST_KEY_CFBundleDisplayName: "andso localization"
