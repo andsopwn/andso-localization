@@ -10,15 +10,18 @@
 		229933F3B1F03562AECAB561 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB34DBDF9091B785AEA9FDD /* Models.swift */; };
 		26E2020664D43C2EC65B3631 /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C95508E751DB0DC9425C2E5 /* SettingsSheet.swift */; };
 		2863673EE48A1620BADB64D0 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA6EBC28CD452CD9D397E516 /* AppIcon.icns */; };
+		462D9CA042DCC9652041EE46 /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68606E088CE9D8618279A56 /* AppIconManager.swift */; };
 		5DCBBA622477B913E6E98CDF /* TrackedAppsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27C763C0A952AE1E18CE45E /* TrackedAppsSheet.swift */; };
 		6672122F82723D3E5E1C5EA0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9392305390EA064F941B5AE /* Card.swift */; };
 		66D5103FB6EC80A2F95A510E /* MonthCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EFCD902EB6833F8174EE1 /* MonthCalendarView.swift */; };
 		7E44C478FE1870B37EEA4CE6 /* WindowSizingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B47359F32D697BF5C0E675 /* WindowSizingView.swift */; };
 		8F4E3896B4270AC114812C1F /* MultiTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EC7BFF5949205D8EE4FBCC /* MultiTimerManager.swift */; };
 		92D2D64E44D5F4B4DFD2BCCA /* QuitGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C82356CCA6A2CB6D1AAD4BB /* QuitGuard.swift */; };
+		9A95F4D121969F32B9B114E9 /* whale.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F8C3B0F0ECC8849BF94669 /* whale.png */; };
 		A34E3EFC616E17C2B6F9BC5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E034F66EDD09DC3160F7CF5E /* InfoPlist.strings */; };
 		AC4C9ACEFDAFC5AF090667F2 /* TimerPresetsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB7F7A405F7B9BE17B2FD9B /* TimerPresetsCard.swift */; };
 		B06F7A045D8F43C939C074D9 /* AppUsageTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524F9B40FC65656A0996C373 /* AppUsageTracker.swift */; };
+		B17FAE7FD094C2B5AC25AEB4 /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 2545229BE14F3B1170631ECB /* cat.png */; };
 		B2862E5C67E6C07DB74B0C46 /* sparkle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C8737BD12DB33340DDC614DA /* sparkle.jpg */; };
 		BD80021AEF1649CE9633EDA6 /* AppDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8419666290A929B528BB7DB /* AppDataStore.swift */; };
 		C637609B3B5C62A3A7173C91 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B4656658C87ECDA11EC065 /* NotificationService.swift */; };
@@ -29,7 +32,9 @@
 
 /* Begin PBXFileReference section */
 		05B4656658C87ECDA11EC065 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		2545229BE14F3B1170631ECB /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
 		2798CF0129B2439EE8FEE4A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		33F8C3B0F0ECC8849BF94669 /* whale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whale.png; sourceTree = "<group>"; };
 		40B47359F32D697BF5C0E675 /* WindowSizingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSizingView.swift; sourceTree = "<group>"; };
 		4C82356CCA6A2CB6D1AAD4BB /* QuitGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitGuard.swift; sourceTree = "<group>"; };
 		4C95508E751DB0DC9425C2E5 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
@@ -44,6 +49,7 @@
 		C8737BD12DB33340DDC614DA /* sparkle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sparkle.jpg; sourceTree = "<group>"; };
 		D8419666290A929B528BB7DB /* AppDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataStore.swift; sourceTree = "<group>"; };
 		DDB7F7A405F7B9BE17B2FD9B /* TimerPresetsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPresetsCard.swift; sourceTree = "<group>"; };
+		E68606E088CE9D8618279A56 /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
 		E9392305390EA064F941B5AE /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		EC0F0D5D6B063EA3B54BC2FB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F69DCE2659B04C8F235A27FE /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -77,8 +83,10 @@
 			isa = PBXGroup;
 			children = (
 				AA6EBC28CD452CD9D397E516 /* AppIcon.icns */,
+				2545229BE14F3B1170631ECB /* cat.png */,
 				E034F66EDD09DC3160F7CF5E /* InfoPlist.strings */,
 				C8737BD12DB33340DDC614DA /* sparkle.jpg */,
+				33F8C3B0F0ECC8849BF94669 /* whale.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -95,6 +103,7 @@
 		93C8E2478B0CF15ED1A4FF41 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E68606E088CE9D8618279A56 /* AppIconManager.swift */,
 				524F9B40FC65656A0996C373 /* AppUsageTracker.swift */,
 				55EC7BFF5949205D8EE4FBCC /* MultiTimerManager.swift */,
 				05B4656658C87ECDA11EC065 /* NotificationService.swift */,
@@ -194,7 +203,9 @@
 			files = (
 				2863673EE48A1620BADB64D0 /* AppIcon.icns in Resources */,
 				A34E3EFC616E17C2B6F9BC5E /* InfoPlist.strings in Resources */,
+				B17FAE7FD094C2B5AC25AEB4 /* cat.png in Resources */,
 				B2862E5C67E6C07DB74B0C46 /* sparkle.jpg in Resources */,
+				9A95F4D121969F32B9B114E9 /* whale.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD80021AEF1649CE9633EDA6 /* AppDataStore.swift in Sources */,
+				462D9CA042DCC9652041EE46 /* AppIconManager.swift in Sources */,
 				B06F7A045D8F43C939C074D9 /* AppUsageTracker.swift in Sources */,
 				6672122F82723D3E5E1C5EA0 /* Card.swift in Sources */,
 				F1D82C4D5437112302B9951B /* ContentView.swift in Sources */,
@@ -303,7 +315,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 0;
 				EXECUTABLE_NAME = andso;
 				INFOPLIST_FILE = Supporting/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "andso localization";
@@ -311,7 +323,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 26.02.11;
+				MARKETING_VERSION = 26.02.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andso.localization;
 				PRODUCT_MODULE_NAME = andso;
 				PRODUCT_NAME = "andso localization";
@@ -391,7 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 0;
 				EXECUTABLE_NAME = andso;
 				INFOPLIST_FILE = Supporting/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "andso localization";
@@ -399,7 +411,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 26.02.11;
+				MARKETING_VERSION = 26.02.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andso.localization;
 				PRODUCT_MODULE_NAME = andso;
 				PRODUCT_NAME = "andso localization";

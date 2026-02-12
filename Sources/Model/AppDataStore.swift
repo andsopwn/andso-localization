@@ -9,11 +9,14 @@ final class AppDataStore: ObservableObject {
 	@Published private(set) var timerPresetsMinutes: [Int] = AppDataStore.defaultTimerPresetsMinutes
 	@Published private(set) var backgroundImageFilename: String?
 	@Published private(set) var backgroundImageChangeToken: UInt64 = 0
+	@Published private(set) var selectedAppIconId: String = AppDataStore.defaultAppIconId
 
 	private static let schemaVersion = 1
 	private static let defaultTimerPresetsMinutes = [60, 30, 15]
 	private static let storageDirectoryName = "andso"
 	private static let legacyStorageDirectoryName = "PTimer"
+	private static let defaultAppIconId = "default"
+	private static let supportedAppIconIds: Set<String> = ["default", "cat", "whale"]
 
 	private static let dayKeyFormatter: DateFormatter = {
 		let f = DateFormatter()
@@ -131,13 +134,22 @@ final class AppDataStore: ObservableObject {
 	}
 
 	func timerPresetMinutes(at index: Int) -> Int {
-		guard timerPresetsMinutes.indices.contains(index) else { return Self.defaultTimerPresetsMinutes.first ?? 60 }
+		guard timerPresetsMinutes.indices.contains(index) else {
+			return Self.defaultTimerPresetsMinutes.first ?? 60
+		}
 		return timerPresetsMinutes[index]
 	}
 
 	func setTimerPresetMinutes(_ minutes: Int, at index: Int) {
 		guard timerPresetsMinutes.indices.contains(index) else { return }
 		timerPresetsMinutes[index] = clampPresetMinutes(minutes)
+		scheduleSave()
+	}
+
+	func setSelectedAppIconId(_ iconId: String) {
+		let normalized = normalizedAppIconId(iconId)
+		guard selectedAppIconId != normalized else { return }
+		selectedAppIconId = normalized
 		scheduleSave()
 	}
 
@@ -197,6 +209,7 @@ final class AppDataStore: ObservableObject {
 		trackedApps = []
 		days = [:]
 		timerPresetsMinutes = Self.defaultTimerPresetsMinutes
+		selectedAppIconId = Self.defaultAppIconId
 		if let oldName = backgroundImageFilename {
 			let oldURL = storageDirectoryURL.appendingPathComponent(oldName)
 			if FileManager.default.fileExists(atPath: oldURL.path) {
@@ -204,6 +217,7 @@ final class AppDataStore: ObservableObject {
 			}
 		}
 		backgroundImageFilename = nil
+		bumpBackgroundChangeToken()
 		scheduleSave()
 	}
 
@@ -217,7 +231,8 @@ final class AppDataStore: ObservableObject {
 			trackedApps: trackedApps,
 			days: days,
 			timerPresetsMinutes: timerPresetsMinutes,
-			backgroundImageFilename: backgroundImageFilename
+			backgroundImageFilename: backgroundImageFilename,
+			selectedAppIconId: selectedAppIconId
 		)
 
 		let encoder = JSONEncoder()
@@ -241,9 +256,10 @@ final class AppDataStore: ObservableObject {
 		trackedApps = file.trackedApps
 		days = file.days
 		timerPresetsMinutes = sanitizedTimerPresets(file.timerPresetsMinutes)
-			backgroundImageFilename = sanitizedBackgroundFilename(file.backgroundImageFilename)
-			bumpBackgroundChangeToken()
-			saveNow()
+		backgroundImageFilename = sanitizedBackgroundFilename(file.backgroundImageFilename)
+		selectedAppIconId = normalizedAppIconId(file.selectedAppIconId)
+		bumpBackgroundChangeToken()
+		saveNow()
 	}
 
 	// MARK: - Disk I/O
@@ -291,6 +307,8 @@ final class AppDataStore: ObservableObject {
 				} else {
 					timerPresetsMinutes = Self.defaultTimerPresetsMinutes
 					backgroundImageFilename = nil
+					selectedAppIconId = Self.defaultAppIconId
+					bumpBackgroundChangeToken()
 					return
 				}
 			}
@@ -303,11 +321,13 @@ final class AppDataStore: ObservableObject {
 				// For now, ignore mismatched schema and start fresh.
 				return
 			}
+
 			trackedApps = file.trackedApps
 			days = file.days
 			timerPresetsMinutes = sanitizedTimerPresets(file.timerPresetsMinutes)
-				backgroundImageFilename = sanitizedBackgroundFilename(file.backgroundImageFilename)
-				bumpBackgroundChangeToken()
+			backgroundImageFilename = sanitizedBackgroundFilename(file.backgroundImageFilename)
+			selectedAppIconId = normalizedAppIconId(file.selectedAppIconId)
+			bumpBackgroundChangeToken()
 
 			if loadedFromLegacy {
 				// Migrate to the new storage directory name on first launch.
@@ -318,10 +338,11 @@ final class AppDataStore: ObservableObject {
 			trackedApps = []
 			days = [:]
 			timerPresetsMinutes = Self.defaultTimerPresetsMinutes
-				backgroundImageFilename = nil
-				bumpBackgroundChangeToken()
-			}
+			backgroundImageFilename = nil
+			selectedAppIconId = Self.defaultAppIconId
+			bumpBackgroundChangeToken()
 		}
+	}
 
 	private func writeToDisk() {
 		do {
@@ -331,7 +352,8 @@ final class AppDataStore: ObservableObject {
 				trackedApps: trackedApps,
 				days: days,
 				timerPresetsMinutes: timerPresetsMinutes,
-				backgroundImageFilename: backgroundImageFilename
+				backgroundImageFilename: backgroundImageFilename,
+				selectedAppIconId: selectedAppIconId
 			)
 
 			let encoder = JSONEncoder()
@@ -368,6 +390,11 @@ final class AppDataStore: ObservableObject {
 
 	private func bumpBackgroundChangeToken() {
 		backgroundImageChangeToken &+= 1
+	}
+
+	private func normalizedAppIconId(_ iconId: String?) -> String {
+		guard let iconId, Self.supportedAppIconIds.contains(iconId) else { return Self.defaultAppIconId }
+		return iconId
 	}
 
 	private func sanitizedBackgroundFilename(_ filename: String?) -> String? {

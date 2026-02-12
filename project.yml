@@ -30,6 +30,6 @@ targets:
         EXECUTABLE_NAME: andso
         PRODUCT_MODULE_NAME: andso
         INFOPLIST_FILE: Supporting/Info.plist
-        MARKETING_VERSION: 26.02.11
-        CURRENT_PROJECT_VERSION: 2
+        MARKETING_VERSION: 26.02.12
+        CURRENT_PROJECT_VERSION: 0
         INFOPLIST_KEY_CFBundleDisplayName: "andso localization"

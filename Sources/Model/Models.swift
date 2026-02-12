@@ -31,4 +31,6 @@ struct DatabaseFile: Codable {
 	var timerPresetsMinutes: [Int]?
 	/// Optional custom background image filename stored under app support directory.
 	var backgroundImageFilename: String?
+	/// Optional app icon id selected by user.
+	var selectedAppIconId: String?
 }

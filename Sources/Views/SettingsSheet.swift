@@ -112,6 +112,23 @@ struct SettingsSheet: View {
 			Divider()
 
 			VStack(alignment: .leading, spacing: 12) {
+				sectionTitle("앱 아이콘")
+
+				HStack(spacing: 10) {
+					ForEach(AppIconManager.options) { option in
+						iconOptionButton(option)
+					}
+					Spacer(minLength: 0)
+				}
+
+				Text("현재 아이콘: \(AppIconManager.displayTitle(for: store.selectedAppIconId))")
+					.font(.system(size: 11, weight: .regular, design: .rounded))
+					.foregroundStyle(Theme.textTertiary(for: colorScheme))
+			}
+
+			Divider()
+
+			VStack(alignment: .leading, spacing: 12) {
 				sectionTitle("지원")
 
 				Button {
@@ -169,6 +186,7 @@ struct SettingsSheet: View {
 		.foregroundStyle(Theme.textPrimary(for: colorScheme))
 		.onAppear {
 			NotificationService.requestAuthorizationIfNeeded()
+			AppIconManager.apply(iconId: store.selectedAppIconId)
 			refreshNotificationStatus()
 		}
 		.alert("DB 불러오기", isPresented: $showImportConfirm) {
@@ -263,12 +281,61 @@ struct SettingsSheet: View {
 		}
 	}
 
+	@ViewBuilder
+	private func iconOptionButton(_ option: AppIconManager.Option) -> some View {
+		let selected = AppIconManager.normalizeIconId(store.selectedAppIconId) == option.id
+
+		Button {
+			selectAppIcon(option.id)
+		} label: {
+			VStack(spacing: 7) {
+				if let img = AppIconManager.image(for: option.id) {
+					Image(nsImage: img)
+						.resizable()
+						.scaledToFit()
+						.frame(width: 40, height: 40)
+						.clipShape(RoundedRectangle(cornerRadius: 9, style: .continuous))
+				} else {
+					Image(systemName: "app.dashed")
+						.font(.system(size: 18, weight: .semibold))
+						.frame(width: 40, height: 40)
+				}
+
+				Text(option.title)
+					.font(.system(size: 11, weight: .semibold, design: .rounded))
+			}
+			.foregroundStyle(Theme.textPrimary(for: colorScheme))
+			.padding(.vertical, 8)
+			.padding(.horizontal, 10)
+			.background(
+				RoundedRectangle(cornerRadius: 14, style: .continuous)
+					.fill(selected ? Theme.accent.opacity(0.28) : Color.white.opacity(0.08))
+					.overlay(
+						RoundedRectangle(cornerRadius: 14, style: .continuous)
+							.strokeBorder(
+								selected ? Theme.accent.opacity(0.75) : Color.white.opacity(0.14),
+								lineWidth: 1
+							)
+					)
+			)
+		}
+		.buttonStyle(.plain)
+	}
+
+	private func selectAppIcon(_ iconId: String) {
+		let normalized = AppIconManager.normalizeIconId(iconId)
+		store.setSelectedAppIconId(normalized)
+		AppIconManager.apply(iconId: normalized)
+		statusMessage = "아이콘 변경됨: \(AppIconManager.displayTitle(for: normalized))"
+	}
+
 	private func confirmImport() {
 		guard let url = pendingImportURL else { return }
 		pendingImportURL = nil
 
 		do {
 			try store.importDatabase(from: url)
+			AppIconManager.apply(iconId: store.selectedAppIconId)
 			statusMessage = "불러옴: \(url.lastPathComponent)"
 		} catch {
 			statusMessage = "불러오기 실패: \(error.localizedDescription)"

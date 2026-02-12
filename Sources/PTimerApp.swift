@@ -4,6 +4,7 @@ import SwiftUI
 final class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ notification: Notification) {
 		NotificationService.configure()
+		AppIconManager.apply(iconId: AppDataStore.shared.selectedAppIconId)
 	}
 
 	func applicationWillTerminate(_ notification: Notification) {
